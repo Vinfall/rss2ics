@@ -6,6 +6,7 @@
 # ICS: https://icspy.readthedocs.io/en/stable/api.html#event
 
 from datetime import datetime, timedelta
+import re
 import dateparser
 from flask import Flask, request, Response
 import feedparser
@@ -16,24 +17,35 @@ import uuid
 app = Flask(__name__)
 
 
+# Sanitize img src in feed summary
+def sanitize_summary(summary):
+    sanitized_summary = re.sub(r"<img src=\".*?\" />", "", summary)
+    return sanitized_summary
+
+
 def rss_to_ics(rss_url):
+    # Parse RSS
     feed = feedparser.parse(rss_url)
+    # Add metadata for iCalendar
     cal = Calendar(creator="RSS2ICS")
     now = datetime.now()
 
     for entry in feed.entries:
-        uid = uuid.uuid4().hex
+        uid = uuid.uuid4().hex  # unique UUID
         entry_time = dateparser.parse(entry.published).replace(tzinfo=pytz.UTC)
+        # Prefer "updated" element over now
         entry_updated = (
             dateparser.parse(entry.updated).replace(tzinfo=pytz.UTC)
             if entry.updated
             else now
         )
+        # Enough info for a calendar event
+        desc = sanitize_summary(entry.summary) + "\n" + entry.link
 
         event = Event(
             uid=uid,
             name=entry.title,
-            description=entry.summary,
+            description=desc,
             begin=entry_time,
             last_modified=entry_updated,
             # categories=["rss"],
