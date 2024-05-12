@@ -5,7 +5,7 @@
 # Feedparser: https://feedparser.readthedocs.io/en/latest/
 # ICS: https://icspy.readthedocs.io/en/stable/api.html#event
 
-from datetime import datetime, timedelta
+from datetime import datetime
 import re
 import dateparser
 from flask import Flask, request, Response
@@ -59,10 +59,13 @@ def rss_to_ics(rss_url):
 
 @app.route("/", methods=["GET"])
 def get_ics():
+    # Generate via `?rss=blahblah.tld/atom.xml`
     rss_url = request.args.get("rss")
     if rss_url:
         ics_content = rss_to_ics(rss_url).serialize()
+        # EOL should be CRLF already
         response = Response(ics_content, mimetype="text/calendar")
+        # TODO: figure out why feed.title cannot be used as filename
         response.headers["Content-Disposition"] = "attachment; filename=rss.ics"
         return response
     else:
