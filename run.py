@@ -22,15 +22,21 @@ def rss_to_ics(rss_url):
     now = datetime.now()
 
     for entry in feed.entries:
-        entry_time = dateparser.parse(entry.published).replace(tzinfo=pytz.UTC)
         uid = uuid.uuid4().hex
+        entry_time = dateparser.parse(entry.published).replace(tzinfo=pytz.UTC)
+        entry_updated = (
+            dateparser.parse(entry.updated).replace(tzinfo=pytz.UTC)
+            if entry.updated
+            else now
+        )
 
         event = Event(
             uid=uid,
             name=entry.title,
             description=entry.summary,
             begin=entry_time,
-            last_modified=now,
+            last_modified=entry_updated,
+            # categories=["rss"],
         )
         event.make_all_day
 
