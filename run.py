@@ -11,22 +11,31 @@ from flask import Flask, request, Response
 import feedparser
 from ics import Calendar, Event
 import pytz
+import uuid
 
 app = Flask(__name__)
 
 
 def rss_to_ics(rss_url):
     feed = feedparser.parse(rss_url)
-    cal = Calendar()
+    cal = Calendar(creator="RSS2ICS")
+    now = datetime.now()
+
     for entry in feed.entries:
-        event = Event()
-        event.name = entry.title
-        event.begin = dateparser.parse(entry.published).replace(tzinfo=pytz.UTC)
-        event.end = dateparser.parse(entry.published).replace(
-            tzinfo=pytz.UTC
-        ) + timedelta(hours=1)
-        event.description = entry.summary
+        entry_time = dateparser.parse(entry.published).replace(tzinfo=pytz.UTC)
+        uid = uuid.uuid4().hex
+
+        event = Event(
+            uid=uid,
+            name=entry.title,
+            description=entry.summary,
+            begin=entry_time,
+            last_modified=now,
+        )
+        event.make_all_day
+
         cal.events.add(event)
+
     return cal
 
 
