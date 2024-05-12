@@ -1,5 +1,6 @@
-dateparser
-feedparser
-flask
-ics
-pytz
+dateparser>=1.2.0
+feedparser>=6.0.11
+Flask>=3.0.3
+ics>=0.7.2
+pytz>=2024.1
+regex==2024.5.10
