@@ -11,7 +11,7 @@ Tested upon [my blog (Atom) feed](https://blog.vinfall.com/index.xml) and severa
 
 Let's say the instance is running at `rss2ics.vercel.app`,
 the RSS feed is `example.com/feed`,
-you can generate ics via `rss2ics.vercel.app/?rss=example.com/feed`.
+you can generate ics via `rss2ics.vercel.app/?url=example.com/feed`.
 
 ## Todo
 

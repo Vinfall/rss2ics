@@ -60,7 +60,7 @@ def rss_to_ics(rss_url):
 @app.route("/", methods=["GET"])
 def get_ics():
     # Generate via `?rss=blahblah.tld/atom.xml`
-    rss_url = request.args.get("rss")
+    rss_url = request.args.get("url")
     if rss_url:
         ics_content = rss_to_ics(rss_url).serialize()
         # EOL should be CRLF already
