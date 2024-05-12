@@ -17,6 +17,6 @@ you can generate ics via `api.rss2ics.com/?rss=example.com/feed`.
 
 - [ ] Use `feed.title` for ICS filename (not sure why it's `None`...)
 
-## License
+## [License](LICENSE)
 
-TBA
+BSD 3-Clause License
