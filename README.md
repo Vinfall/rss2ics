@@ -9,9 +9,9 @@ Tested upon [my blog (Atom) feed](https://blog.vinfall.com/index.xml) and severa
 
 ## Usage
 
-Let's say the API address is `api.rss2ics.com` (not really accessible),
+Let's say the instance is running at `rss2ics.vercel.app`,
 the RSS feed is `example.com/feed`,
-you can generate ics via `api.rss2ics.com/?rss=example.com/feed`.
+you can generate ics via `rss2ics.vercel.app/?rss=example.com/feed`.
 
 ## Todo
 
