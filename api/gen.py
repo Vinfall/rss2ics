@@ -69,7 +69,10 @@ def get_ics():
         response.headers["Content-Disposition"] = "attachment; filename=rss.ics"
         return response
     else:
-        return "No RSS URL provided", 400
+        return (
+            "No RSS URL provided. See usage at https://github.com/Vinfall/rss2ics",
+            400,
+        )
 
 
 if __name__ == "__main__":
