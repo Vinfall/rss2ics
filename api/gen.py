@@ -7,6 +7,7 @@
 
 from datetime import datetime
 import re
+import random
 import dateparser
 from flask import Flask, request, Response
 import feedparser
@@ -57,11 +58,19 @@ def rss_to_ics(rss_url):
     return cal
 
 
-error_msg = """
-No RSS URL provided. Usage: https://rss2ics.vercel.app/?url=example.com/feed
+def coin():
+    return random.choice([0, 1])
 
-<div><img src="https://http.cat/400.jpg" alt="Bad Request" style="max-width:400px;"></div>
-"""
+
+def get_error_message():
+    # Cat or dog, that is the question
+    error_msg = """
+    No RSS URL provided. Usage: https://rss2ics.vercel.app/?url=example.com/feed
+
+    <div><img src="https://{}/400.jpg" alt="Bad Request" style="max-width:400px;"></div>
+    """.format("http.cat" if coin() == 0 else "http.dog")
+
+    return error_msg
 
 
 @app.route("/", methods=["GET"])
@@ -77,7 +86,7 @@ def get_ics():
         return response
     else:
         return (
-            error_msg,
+            get_error_message(),
             400,
         )
 
