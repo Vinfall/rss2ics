@@ -57,9 +57,16 @@ def rss_to_ics(rss_url):
     return cal
 
 
+error_msg = """
+No RSS URL provided. Usage: https://rss2ics.vercel.app/?url=example.com/feed
+
+<div><img src="https://http.cat/400.jpg" alt="Bad Request" style="max-width:400px;"></div>
+"""
+
+
 @app.route("/", methods=["GET"])
 def get_ics():
-    # Generate via `?rss=blahblah.tld/atom.xml`
+    # Generate via `?url=blahblah.tld/atom.xml`
     rss_url = request.args.get("url")
     if rss_url:
         ics_content = rss_to_ics(rss_url).serialize()
@@ -70,7 +77,7 @@ def get_ics():
         return response
     else:
         return (
-            "No RSS URL provided. See usage at https://github.com/Vinfall/rss2ics",
+            error_msg,
             400,
         )
 
