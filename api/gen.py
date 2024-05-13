@@ -8,6 +8,7 @@
 from datetime import datetime
 import re
 import random
+import hashlib
 import dateparser
 from flask import Flask, request, Response
 import feedparser
@@ -31,9 +32,12 @@ def rss_to_ics(rss_url):
     cal = Calendar(creator="RSS2ICS")
     now = datetime.now()
 
-    for entry in feed.entries:
-        uid = uuid.uuid4().hex  # unique UUID
+    for entry in reversed(feed.entries):
         entry_time = dateparser.parse(entry.published).replace(tzinfo=pytz.UTC)
+        # unique UUID
+        # uid = uuid.uuid4().hex
+        combined_string = entry.title + "-" + entry_time.strftime("%Y-%m-%d")
+        uid = hashlib.md5(combined_string.encode()).hexdigest()
         # Prefer "updated" element over now
         entry_updated = (
             dateparser.parse(entry.updated).replace(tzinfo=pytz.UTC)
@@ -45,10 +49,10 @@ def rss_to_ics(rss_url):
 
         event = Event(
             uid=uid,
-            name=entry.title,
-            description=desc,
             begin=entry_time,
             last_modified=entry_updated,
+            name=entry.title,
+            description=desc,
             # categories=["rss"],
         )
         event.make_all_day
