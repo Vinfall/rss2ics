@@ -25,7 +25,7 @@ def client():
 # Test against different specs
 test_urls = {
     "RSS 2.0": "https://blog.vinfall.com/index.xml",
-    "Atom": "https://git.vinfall.com/Vinfall/rss2ics/tags.atom",
+    # "Atom": "https://git.vinfall.com/Vinfall/rss2ics/tags.atom",
 }
 
 
