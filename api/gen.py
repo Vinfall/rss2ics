@@ -3,7 +3,7 @@
 
 # Documentation
 # Feedparser: https://feedparser.readthedocs.io/en/latest/
-# ICS: https://icspy.readthedocs.io/en/stable/api.html#event
+# ICS (outdated): https://icspy.readthedocs.io/en/stable/api.html#event
 
 from datetime import datetime
 import re
@@ -51,13 +51,14 @@ def rss_to_ics(rss_url):
             uid=uid,
             begin=entry_time,
             last_modified=entry_updated,
-            name=entry.title,
+            dtstamp=now,
+            summary=entry.title,
             description=desc,
             # categories=["rss"],
         )
         event.make_all_day
 
-        cal.events.add(event)
+        cal.events.append(event)
 
     return cal
 
