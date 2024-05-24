@@ -8,15 +8,11 @@ import pytest
 import importlib.util
 import os
 
-# Define the path to gen.py
 gen_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../api/gen.py"))
-
-# Load the gen module
 spec = importlib.util.spec_from_file_location("gen", gen_path)
 gen = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(gen)
 
-# Now we can access `gen.app`
 app = gen.app
 
 
@@ -27,7 +23,6 @@ def client():
 
 
 def test_get_ics_with_url(client):
-    # Change the URL to a valid RSS feed URL for testing
     response = client.get("/?url=https://blog.vinfall.com/index.xml")
     assert response.status_code == 200
     assert response.mimetype == "text/calendar"
