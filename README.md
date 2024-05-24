@@ -15,8 +15,31 @@ Let's say the instance is running at `rss2ics.vercel.app`,
 the RSS feed is `example.com/feed`,
 you can generate ics via `rss2ics.vercel.app/?url=example.com/feed`.
 
+## Install
+
+IMO there is nothing to talk about. Just clone the repo and install the requirements to run it locally,
+or simply run commands like `vercel` to deploy it on platforms that support Python (serverless) functions.
+
+## Test
+
+You can run the test suite via the following command:
+
+```python
+# Setup virtualenv
+virtualenv .venv
+source ./.venv/bin/activate
+# Install packages
+pip install requirements-dev.txt
+# Make sure to use module if you have pytest installed system-wide
+# otherwise they would conflict and complain forever
+python -m pytest tests/test-api.py
+```
+
+Maybe I would add more rules soon™, but for now it's nothing and only serve for my exploration of `pytest`.
+
 ## Todo
 
+- [ ] Setup pytest and coverage for fun (WIP)
 - [ ] Use `feed.title` for ICS filename (not sure why it's `None`...)
 
 ## [License](LICENSE)
