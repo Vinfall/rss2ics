@@ -22,11 +22,28 @@ def client():
         yield client
 
 
-def test_get_ics_with_url(client):
-    response = client.get("/?url=https://blog.vinfall.com/index.xml")
-    assert response.status_code == 200
-    assert response.mimetype == "text/calendar"
-    assert b"BEGIN:VCALENDAR" in response.data
+# Test against different specs
+test_urls = {
+    "RSS 2.0": "https://blog.vinfall.com/index.xml",
+    "Atom": "https://git.vinfall.com/Vinfall/rss2ics/tags.atom",
+}
+
+
+@pytest.mark.parametrize("name, url", test_urls.items())
+def test_get_ics_with_url(client, name, url):
+    # Fetch response using the URL from the dictionary
+    response = client.get(f"/?url={url}")
+
+    # Check response status code
+    assert response.status_code == 200, f"Failed for URL: {url}"
+
+    # Check response mimetype
+    assert response.mimetype == "text/calendar", f"Incorrect mimetype for URL: {url}"
+
+    # Check for VCALENDAR content
+    assert (
+        b"BEGIN:VCALENDAR" in response.data
+    ), f"Missing VCALENDAR content for URL: {url}"
 
 
 def test_get_ics_without_url(client):

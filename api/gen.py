@@ -33,17 +33,23 @@ def rss_to_ics(rss_url):
     now = datetime.now()
 
     for entry in reversed(feed.entries):
-        entry_time = dateparser.parse(entry.published).replace(tzinfo=pytz.UTC)
-        # unique UUID
-        # uid = uuid.uuid4().hex
-        combined_string = entry.title + "-" + entry_time.strftime("%Y-%m-%d")
-        uid = hashlib.md5(combined_string.encode()).hexdigest()
+        # Fallback to "updated" if "published" does not exist
+        if hasattr(entry, "published") and entry.published is not None:
+            entry_time = dateparser.parse(entry.published).replace(tzinfo=pytz.UTC)
+        elif entry.updated:
+            entry_time = dateparser.parse(entry.updated).replace(tzinfo=pytz.UTC)
+        else:
+            entry_time = now
         # Prefer "updated" element over now
         entry_updated = (
             dateparser.parse(entry.updated).replace(tzinfo=pytz.UTC)
             if entry.updated
             else now
         )
+        # unique UUID
+        # uid = uuid.uuid4().hex
+        combined_string = entry.title + "-" + entry_time.strftime("%Y-%m-%d")
+        uid = hashlib.md5(combined_string.encode()).hexdigest()
         # Enough info for a calendar event
         desc = sanitize_summary(entry.summary) + "\n" + entry.link
 
