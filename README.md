@@ -32,7 +32,7 @@ source ./.venv/bin/activate
 pip install requirements-dev.txt
 # Make sure to use module if you have pytest installed system-wide
 # otherwise they would conflict and complain forever
-python -m pytest tests/test-api.py
+python -m pytest tests/test_api.py
 ```
 
 Maybe I would add more rules soon™, but for now it's nothing and only serve for my exploration of `pytest`.
