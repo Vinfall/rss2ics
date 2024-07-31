@@ -5,15 +5,17 @@
 # Feedparser: https://feedparser.readthedocs.io/en/latest/
 # ICS (outdated): https://icspy.readthedocs.io/en/stable/api.html#event
 
-from datetime import datetime
-import re
-import random
 import hashlib
+import random
+import re
+from datetime import datetime
+
 import dateparser
-from flask import Flask, request, Response
 import feedparser
-from ics import Calendar, Event
 import pytz
+from flask import Flask, Response, request
+from ics import Calendar, Event
+
 # import uuid
 
 app = Flask(__name__)
@@ -79,7 +81,9 @@ def get_error_message():
     No RSS URL provided. Usage: https://rss2ics.vercel.app/?url=example.com/feed
 
     <div><img src="https://{}/400.jpg" alt="Bad Request" style="max-width:400px;"></div>
-    """.format("http.cat" if coin() == 0 else "http.dog")
+    """.format(
+        "http.cat" if coin() == 0 else "http.dog"
+    )
 
     return error_msg
 

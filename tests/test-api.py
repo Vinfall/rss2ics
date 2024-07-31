@@ -4,9 +4,10 @@
 # Documentation
 # pytest: https://docs.pytest.org/en/latest/
 
-import pytest
 import importlib.util
 import os
+
+import pytest
 
 gen_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../api/gen.py"))
 spec = importlib.util.spec_from_file_location("gen", gen_path)
