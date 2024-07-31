@@ -54,9 +54,14 @@ def rss_to_ics(rss_url):
         combined_string = entry.title + "-" + entry_time.strftime("%Y-%m-%d")
         # trunk-ignore(bandit/B324): UUID
         uid = hashlib.md5(combined_string.encode()).hexdigest()
-        # Enough info for a calendar event
-        desc = sanitize_summary(entry.summary) + "\n" + entry.link
+        # Some ATOM feeds have no summary/description
+        desc = ""
+        if hasattr(entry, "summary") and entry.summary:
+            desc = sanitize_summary(entry.summary) + "\n" + entry.link
+        else:
+            desc = entry.link
 
+        # Enough info for a calendar event
         event = Event(
             uid=uid,
             begin=entry_time,
