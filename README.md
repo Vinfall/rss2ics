@@ -40,7 +40,7 @@ Maybe I would add more rules soon™, but for now it's nothing and only serve fo
 ## Todo
 
 - [ ] Setup pytest and coverage for fun (WIP)
-- [ ] Add Atom support
+- [ ] Add (better) Atom support
 - [ ] Use `feed.title` for ICS filename (not sure why it's `None`...)
 
 ## [License](LICENSE)
