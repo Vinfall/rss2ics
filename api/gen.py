@@ -51,6 +51,7 @@ def rss_to_ics(rss_url):
         # unique UUID
         # uid = uuid.uuid4().hex
         combined_string = entry.title + "-" + entry_time.strftime("%Y-%m-%d")
+        # trunk-ignore(bandit/B324): UUID
         uid = hashlib.md5(combined_string.encode()).hexdigest()
         # Enough info for a calendar event
         desc = sanitize_summary(entry.summary) + "\n" + entry.link
@@ -64,7 +65,7 @@ def rss_to_ics(rss_url):
             description=desc,
             # categories=["rss"],
         )
-        event.make_all_day
+        event.make_all_day()
 
         cal.events.append(event)
 
@@ -72,6 +73,7 @@ def rss_to_ics(rss_url):
 
 
 def coin():
+    # trunk-ignore(bandit/B311): just for fun
     return random.choice([0, 1])
 
 
@@ -107,4 +109,4 @@ def get_ics():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)

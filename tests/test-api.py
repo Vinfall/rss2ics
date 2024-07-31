@@ -35,6 +35,7 @@ def test_get_ics_with_url(client, name, url):
     # Fetch response using the URL from the dictionary
     response = client.get(f"/?url={url}")
 
+    # trunk-ignore-all(bandit/B101): pytest uses assert extensively
     # Check response status code
     assert response.status_code == 200, f"Failed for URL: {url}"
 
