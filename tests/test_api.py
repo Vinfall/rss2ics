@@ -27,6 +27,7 @@ def client():
 test_urls = {
     "RSS 2.0": "https://blog.vinfall.com/index.xml",
     "Atom": "https://git.vinfall.com/Vinfall/rss2ics/tags.atom",
+    "RSSHub": "https://rsshub.app/rsshub/routes/en",
 }
 
 
