@@ -35,6 +35,7 @@ def rss_to_ics(rss_url):
     now = datetime.now()
 
     for entry in reversed(feed.entries):
+        # NOTE: feedparser has a reverse fallback to "published" if "updated" does not exist...
         # Fallback to "updated" if "published" does not exist
         if hasattr(entry, "published") and entry.published is not None:
             entry_time = dateparser.parse(entry.published).replace(tzinfo=pytz.UTC)
