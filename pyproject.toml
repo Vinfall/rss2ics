@@ -35,4 +35,8 @@ test = ["pytest>=8.2.1"]
 
 # Linter
 [tool.pylint]
-disable = ["missing-function-docstring", "no-else-return"]
+disable = [
+    "missing-module-docstring",
+    "missing-function-docstring",
+    "no-else-return",
+]
