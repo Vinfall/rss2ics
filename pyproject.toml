@@ -27,7 +27,7 @@ dependencies = [
     "Flask>=3.0.3",
     "ics==0.8.0.dev0",
     "pytz>=2024.1",
-    "regex==2024.5.15",
+    "regex==2024.11.6",
 ]
 
 [project.optional-dependencies]
@@ -35,8 +35,4 @@ test = ["pytest>=8.2.1"]
 
 # Linter
 [tool.pylint]
-disable = [
-    "missing-module-docstring",
-    "missing-function-docstring",
-    "no-else-return",
-]
+disable = ["missing-module-docstring", "missing-function-docstring", "no-else-return"]

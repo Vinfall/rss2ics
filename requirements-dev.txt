@@ -3,5 +3,5 @@ feedparser>=6.0.11
 Flask>=3.0.3
 ics==0.8.0.dev0
 pytz>=2024.2
-regex==2024.9.11
+regex==2024.11.6
 pytest>=8.3.1
