@@ -25,9 +25,9 @@ or simply run commands like `vercel` to deploy it on platforms that support Pyth
 You can run the test suite via the following command:
 
 ```python
-# Setup virtualenv
-virtualenv .venv
-source ./.venv/bin/activate
+# Setup venv
+python3 -m venv
+source .venv/bin/activate
 # Install packages
 pip install requirements-dev.txt
 # Make sure to use module if you have pytest installed system-wide
