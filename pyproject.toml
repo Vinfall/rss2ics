@@ -16,22 +16,19 @@ classifiers = [
     "Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware",
     "Private :: Do Not Upload",
 ]
-
-[project.urls]
-Homepage = "https://github.com/Vinfall/rss2ics"
-
-[tool]
 dependencies = [
     "dateparser>=1.2.0",
     "feedparser>=6.0.11",
     "Flask>=3.0.3",
     "ics==0.8.0.dev0",
-    "pytz>=2024.1",
+    "pytz>=2024.2",
     "regex==2024.11.6",
 ]
+[optional-dependencies]
+test = ["pytest>=8.3.4"]
 
-[project.optional-dependencies]
-test = ["pytest>=8.2.1"]
+[project.urls]
+homepage = "https://github.com/Vinfall/rss2ics"
 
 # Linter
 [tool.pylint]
