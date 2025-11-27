@@ -37,11 +37,10 @@ python -m pytest tests/test_api.py
 
 Maybe I would add more rules soon™, but for now it's nothing and only serve for my exploration of `pytest`.
 
-## Todo
+## TODO
 
-- [ ] Setup pytest and coverage for fun (WIP)
-- [x] Add (better) Atom support
-- [ ] Use `feed.title` for ICS filename (not sure why it's `None`...)
+- Setup pytest and coverage for fun (WIP)
+- Use `feed.title` for ICS filename (not sure why it's `None`...)
 
 ## [License](LICENSE)
 
