@@ -30,6 +30,25 @@ test = ["pytest>=8.3.4"]
 [project.urls]
 homepage = "https://github.com/Vinfall/rss2ics"
 
-# Linter
-[tool.pylint]
-disable = ["missing-module-docstring", "missing-function-docstring", "no-else-return"]
+[tool.ruff]
+unsafe-fixes = true
+
+# https://docs.astral.sh/ruff/rules/
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "ANN",
+    "E501", # EditorConfig
+    "COM", # commas
+    "D1", # docstring
+    "D212",
+    "D203", # prefer D211
+    "ERA", # commented-out-code
+    "FIX", # fixme
+    "TD002", # todo
+    "TD003",
+    "PLR2004", # magic-value-comparison
+    "PTH", # flake8-use-pathlib: slower than os
+    "RET505", # superfluous-else-return
+    "T20", # print
+]

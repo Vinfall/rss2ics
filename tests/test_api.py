@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 # Documentation
 # pytest: https://docs.pytest.org/en/latest/
@@ -31,7 +30,7 @@ test_urls = {
 }
 
 
-@pytest.mark.parametrize("name, url", test_urls.items())
+@pytest.mark.parametrize(("name", "url"), test_urls.items())
 def test_get_ics_with_url(client, name, url):
     # Fetch response using the URL from the dictionary
     response = client.get(f"/?url={url}")
@@ -44,9 +43,9 @@ def test_get_ics_with_url(client, name, url):
     assert response.mimetype == "text/calendar", f"Incorrect mimetype for URL: {url}"
 
     # Check for VCALENDAR content
-    assert (
-        b"BEGIN:VCALENDAR" in response.data
-    ), f"Missing VCALENDAR content for URL: {url}"
+    assert b"BEGIN:VCALENDAR" in response.data, (
+        f"Missing VCALENDAR content for URL: {url}"
+    )
 
 
 def test_get_ics_without_url(client):

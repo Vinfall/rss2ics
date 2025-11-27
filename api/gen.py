@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 # Documentation
 # Feedparser: https://feedparser.readthedocs.io/en/latest/
@@ -23,8 +22,7 @@ app = Flask(__name__)
 
 # Sanitize img src in feed summary
 def sanitize_summary(summary):
-    sanitized_summary = re.sub(r"<img src=\".*?\" />", "", summary)
-    return sanitized_summary
+    return re.sub(r"<img src=\".*?\" />", "", summary)
 
 
 def rss_to_ics(rss_url):
@@ -32,7 +30,7 @@ def rss_to_ics(rss_url):
     feed = feedparser.parse(rss_url)
     # Add metadata for iCalendar
     cal = Calendar(creator="RSS2ICS")
-    now = datetime.now()
+    now = datetime.now()  # noqa: DTZ005
 
     for entry in reversed(feed.entries):
         # NOTE: feedparser has a reverse fallback to "published" if "updated" does not exist...
@@ -52,8 +50,7 @@ def rss_to_ics(rss_url):
         # unique UUID
         # uid = uuid.uuid4().hex
         combined_string = entry.title + "-" + entry_time.strftime("%Y-%m-%d")
-        # trunk-ignore(bandit/B324): UUID
-        uid = hashlib.md5(combined_string.encode()).hexdigest()
+        uid = hashlib.md5(combined_string.encode()).hexdigest()  # noqa: S324
         # Some ATOM feeds have no summary/description
         desc = ""
         if hasattr(entry, "summary") and entry.summary:
@@ -79,21 +76,16 @@ def rss_to_ics(rss_url):
 
 
 def coin():
-    # trunk-ignore(bandit/B311): just for fun
-    return random.choice([0, 1])
+    return random.choice([0, 1])  # noqa: S311
 
 
 def get_error_message():
     # Cat or dog, that is the question
-    error_msg = """
+    return """
     No RSS URL provided. Usage: https://rss2ics.vercel.app/?url=example.com/feed
 
     <div><img src="https://{}/400.jpg" alt="Bad Request" style="max-width:400px;"></div>
-    """.format(
-        "http.cat" if coin() == 0 else "http.dog"
-    )
-
-    return error_msg
+    """.format("http.cat" if coin() == 0 else "http.dog")
 
 
 @app.route("/", methods=["GET"])
