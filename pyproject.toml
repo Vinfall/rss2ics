@@ -2,33 +2,35 @@
 name = "rss2ics"
 version = "3.3.0"
 description = "Convert Atom/RSS feed into iCalendar"
-keywords = ["converter", "icalendar", "ics", "serverless"]
-requires-python = ">=3.12"
-authors = [{ name = "Vinfall" }]
 readme = "README.md"
-license = { file = "LICENSE" }
+requires-python = ">=3.12"
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+authors = [{ name = "Vinfall" }]
+keywords = ["converter", "icalendar", "ics", "serverless"]
 classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: BSD License",
-    "Operating System :: OS Independent",
-    "Framework :: Flask",
-    "Framework :: Pytest",
-    "Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware",
-    "Private :: Do Not Upload",
+  "Framework :: Flask",
+  "Framework :: Pytest",
+  "License :: OSI Approved :: BSD License",
+  "Operating System :: OS Independent",
+  "Private :: Do Not Upload",
+  "Programming Language :: Python :: 3",
+  "Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware",
 ]
 dependencies = [
-    "dateparser>=1.2.2",
-    "feedparser>=6.0.11",
-    "Flask>=3.1.1",
-    "ics==0.8.0.dev0",
-    "pytz>=2025.2",
-    "regex==2025.7.34",
+  "Flask>=3.1.1",
+  "dateparser>=1.2.2",
+  "feedparser>=6.0.11",
+  "ics==0.8.0.dev0",
+  "pytz>=2025.2",
+  "regex==2025.7.34",
 ]
-[project.optional-dependencies]
-test = ["pytest>=8.3.4"]
 
 [project.urls]
 homepage = "https://github.com/Vinfall/rss2ics"
+
+[project.optional-dependencies]
+test = ["pytest>=8.3.4"]
 
 [tool.ruff]
 unsafe-fixes = true
@@ -37,18 +39,18 @@ unsafe-fixes = true
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
-    "ANN",
-    "E501", # EditorConfig
-    "COM", # commas
-    "D1", # docstring
-    "D212",
-    "D203", # prefer D211
-    "ERA", # commented-out-code
-    "FIX", # fixme
-    "TD002", # todo
-    "TD003",
-    "PLR2004", # magic-value-comparison
-    "PTH", # flake8-use-pathlib: slower than os
-    "RET505", # superfluous-else-return
-    "T20", # print
+  "ANN",
+  "E501", # EditorConfig
+  "COM", # commas
+  "D1", # docstring
+  "D212",
+  "D203", # prefer D211
+  "ERA", # commented-out-code
+  "FIX", # fixme
+  "TD002", # todo
+  "TD003",
+  "PLR2004", # magic-value-comparison
+  "PTH", # flake8-use-pathlib: slower than os
+  "RET505", # superfluous-else-return
+  "T20", # print
 ]
